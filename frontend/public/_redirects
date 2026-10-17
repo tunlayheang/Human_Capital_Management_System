@@ -1,0 +1,5 @@
+# Static assets first — PDF Unicode font must not fall through to SPA HTML.
+/fonts/*  /fonts/:splat  200
+/assets/* /assets/:splat 200
+# SPA fallback for local/preview hosts. Production API calls use VITE_API_BASE_URL (see render.yaml).
+/*    /index.html   200

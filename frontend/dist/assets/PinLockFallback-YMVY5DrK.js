@@ -1,0 +1,1 @@
+import{j as s}from"./ui-BPliW9hn.js";import{c8 as i,A as r}from"./index-DZwQ8WDl.js";import"./vendor-Cqeh9s4H.js";import"./utils-CU1wMGmb.js";import"./dates-CGqUQNdq.js";const t=()=>s.jsx("div",{className:"fixed inset-0",style:{zIndex:i},"aria-busy":"true",children:s.jsx(r,{})});export{t as PinLockFallback};

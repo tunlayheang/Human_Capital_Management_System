@@ -1,0 +1,168 @@
+/**
+ * Cross-browser UI foundations — load before Tailwind layers.
+ * Pairs with `utils/browserCompat.ts` (--hcms-vh JS fallback for mobile browsers).
+ */
+
+:root {
+  --hcms-vh: 1vh;
+  --hcms-safe-top: env(safe-area-inset-top, 0px);
+  --hcms-safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Full app shell height (Layout, auth pages) */
+.hcms-app-shell {
+  height: calc(var(--hcms-vh, 1vh) * 100);
+  max-height: calc(var(--hcms-vh, 1vh) * 100);
+  width: 100%;
+  max-width: 100vw;
+}
+
+@supports (height: 100dvh) {
+  .hcms-app-shell {
+    height: 100dvh;
+    max-height: 100dvh;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hcms-app-shell {
+    /* Prefer dvh so fixed bars are not pushed under browser/OS chrome */
+    height: 100dvh;
+    max-height: 100dvh;
+  }
+
+  @supports not (height: 100dvh) {
+    .hcms-app-shell {
+      height: 100vh;
+      max-height: 100vh;
+    }
+  }
+}
+
+/* Sidebar / drawer full height */
+.hcms-sidebar-height {
+  height: calc(var(--hcms-vh, 1vh) * 100);
+  max-height: calc(var(--hcms-vh, 1vh) * 100);
+}
+
+@supports (height: 100dvh) {
+  .hcms-sidebar-height {
+    height: 100dvh;
+    max-height: 100dvh;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hcms-sidebar-height {
+    height: 100dvh;
+    max-height: 100dvh;
+  }
+
+  @supports not (height: 100dvh) {
+    .hcms-sidebar-height {
+      height: 100vh;
+      max-height: 100vh;
+    }
+  }
+}
+
+/* Minimum page height */
+.hcms-min-viewport {
+  min-height: calc(var(--hcms-vh, 1vh) * 100);
+}
+
+@supports (height: 100dvh) {
+  .hcms-min-viewport {
+    min-height: 100dvh;
+  }
+}
+
+/* iOS Safari fill when address bar collapses */
+@supports (-webkit-touch-callout: none) {
+  .hcms-app-shell,
+  .hcms-sidebar-height,
+  .hcms-min-viewport {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* overflow-x: clip fallback (Firefox < 128, older Safari) */
+html.hcms-no-overflow-clip body,
+html.hcms-no-overflow-clip #root {
+  overflow-x: hidden !important;
+}
+
+/* backdrop-filter fallback — use opaque surfaces */
+html.hcms-no-backdrop .hcms-modal-header,
+html.hcms-no-backdrop .hcms-modal-footer {
+  background-color: rgb(248 250 252) !important;
+}
+
+html.dark.hcms-no-backdrop .hcms-modal-header,
+html.dark.hcms-no-backdrop .hcms-modal-footer {
+  background-color: rgb(15 23 42) !important;
+}
+
+html.hcms-no-backdrop [class*='backdrop-blur'] {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+html.hcms-no-backdrop .bg-white\/90,
+html.hcms-no-backdrop .bg-white\/95 {
+  background-color: rgb(255 255 255 / 0.98) !important;
+}
+
+html.dark.hcms-no-backdrop .bg-slate-900\/90,
+html.dark.hcms-no-backdrop .bg-slate-900\/95 {
+  background-color: rgb(15 23 42 / 0.98) !important;
+}
+
+/* Buttons — consistent tap target rendering across engines */
+button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Touch: remove gray flash on tap (iOS/Android) */
+button,
+a,
+[role='button'] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Focus rings — keyboard users on all engines */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid rgb(72 182 198);
+  outline-offset: 2px;
+}
+
+.dark :focus-visible {
+  outline-color: rgb(72 182 198);
+}
+
+/* Respect reduced motion everywhere */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Legacy flex gap fallback for very old browsers (margin on children) */
+html.hcms-no-flex-gap .hcms-flex-gap-fallback > * + * {
+  margin-left: 0.5rem;
+}
+
+html.hcms-no-flex-gap .hcms-flex-gap-fallback-col > * + * {
+  margin-left: 0;
+  margin-top: 0.5rem;
+}

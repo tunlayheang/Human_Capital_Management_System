@@ -1,0 +1,1 @@
+import{h as r,r as o}from"./vendor-Cqeh9s4H.js";import{bT as s}from"./index-DZwQ8WDl.js";import"./ui-BPliW9hn.js";import"./utils-CU1wMGmb.js";import"./dates-CGqUQNdq.js";const t=()=>{const{openCompanyStructure:t}=s(),e=r();return o.useEffect(()=>{t(),e("/dashboard",{replace:!0})},[t,e]),null};export{t as CompanyStructure};

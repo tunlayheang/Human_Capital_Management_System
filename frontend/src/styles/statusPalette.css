@@ -1,0 +1,44 @@
+/**
+ * HCMS status tag pills — paired with StatusLabel + statusPalette.ts
+ */
+.hcms-status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  max-width: 100%;
+  border-radius: 9999px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.hcms-status-tag--sm {
+  padding: 0.125rem 0.5rem;
+  font-size: 0.6875rem;
+}
+
+.hcms-status-tag--md {
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+}
+
+.hcms-status-tag__icon {
+  flex-shrink: 0;
+}
+
+.hcms-status-tag__icon--sm {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.hcms-status-tag__icon--md {
+  width: 1rem;
+  height: 1rem;
+}
+
+.hcms-status-tag__text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

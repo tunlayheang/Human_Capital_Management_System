@@ -1,0 +1,1 @@
+import{j as a}from"./ui-BPliW9hn.js";import{t as s}from"./index-DZwQ8WDl.js";const e=({label:e,layout:r="dashboard",appearance:o,rows:n,className:p=""})=>a.jsx(s,{variant:"page",label:e,layout:r,appearance:"spinner"===o?"spinner":"skeleton",rows:n,className:p});export{e as P};

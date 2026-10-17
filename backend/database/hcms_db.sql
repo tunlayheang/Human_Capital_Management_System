@@ -1,0 +1,3 @@
+﻿-- Public portfolio placeholder
+-- Production schema and live employee data have been intentionally removed.
+-- Configure a local demo database before running the application.

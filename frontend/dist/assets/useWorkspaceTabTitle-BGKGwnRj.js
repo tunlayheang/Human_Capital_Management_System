@@ -1,0 +1,1 @@
+import{u as e,r as a}from"./vendor-Cqeh9s4H.js";import{k as t,bJ as s}from"./index-DZwQ8WDl.js";function r(r){const{pathname:o,search:i}=e(),n=t(),m=r?.trim()??"",f=s(o);a.useEffect(()=>{n?.enabled&&(f&&m?n.updateTabTitle(o,i,m):n.resetTabTitle(o,i))},[n,o,i,m,f])}export{r as u};

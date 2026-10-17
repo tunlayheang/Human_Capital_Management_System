@@ -1,0 +1,1 @@
+function e(e,t,n=0){e(function(e,t=0){const n=new URLSearchParams;return n.set("movementId",e.id),t>0&&n.set("step",String(t)),`/employees/movements/view?${n.toString()}`}(t,n),{state:{movement:t}})}export{e as n};

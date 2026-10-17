@@ -1,0 +1,1111 @@
+/* ROC Employee ID Card page — layout + card preview (faces scoped to .employee-card-root) */
+
+.employee-card-page-shell {
+  width: 100%;
+}
+
+.employee-card-page-grid {
+  display: grid;
+  /* Card preview on the left, workflow controls on the right */
+  grid-template-columns: 1fr minmax(280px, 340px);
+  gap: 1.25rem;
+  width: 100%;
+  align-items: stretch;
+}
+
+.employee-card-page-grid > .employee-card-stage {
+  order: 1;
+}
+
+.employee-card-page-grid > .employee-card-panel {
+  order: 2;
+}
+
+@media (max-width: 1023px) {
+  .employee-card-page-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Keep the card above the workflow panel on small screens */
+  .employee-card-page-grid > .employee-card-stage {
+    order: 1;
+  }
+
+  .employee-card-page-grid > .employee-card-panel {
+    order: 2;
+  }
+}
+
+.employee-card-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.15rem 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid rgb(226 232 240 / 0.9);
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(15 23 42 / 0.06);
+  height: fit-content;
+}
+
+.dark .employee-card-panel {
+  border-color: rgb(51 65 85 / 0.8);
+  background: rgb(15 23 42 / 0.55);
+}
+
+.employee-card-select {
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.625rem;
+  border: 1px solid rgb(203 213 225);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #1a3a4a;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.employee-card-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgb(51 144 236 / 0.2);
+}
+
+.dark .employee-card-select {
+  border-color: rgb(71 85 105);
+  background: rgb(30 41 59);
+  color: rgb(241 245 249);
+}
+
+.employee-card-panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.employee-card-workflow-step {
+  display: flex;
+  gap: 0.75rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgb(241 245 249);
+}
+
+.dark .employee-card-workflow-step {
+  border-top-color: rgb(51 65 85 / 0.6);
+}
+
+.employee-card-workflow-step__num {
+  flex-shrink: 0;
+  width: 1.35rem;
+  height: 1.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: rgb(241 245 249);
+  font-size: 0.6875rem;
+  font-weight: 800;
+  color: rgb(100 116 139);
+  margin-top: 0.1rem;
+}
+
+.dark .employee-card-workflow-step__num {
+  background: rgb(51 65 85);
+  color: rgb(203 213 225);
+}
+
+.employee-card-workflow-step__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.employee-card-workflow-step__title {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgb(100 116 139);
+}
+
+.dark .employee-card-workflow-step__title {
+  color: rgb(148 163 184);
+}
+
+.employee-card-context {
+  margin: 0;
+  border-radius: 0.625rem;
+  padding: 0.55rem 0.7rem;
+  font-size: 0.6875rem;
+  line-height: 1.45;
+}
+
+.employee-card-context--draft {
+  background: rgb(240 249 255);
+  color: rgb(12 74 110);
+  border: 1px solid rgb(186 230 253);
+}
+
+.dark .employee-card-context--draft {
+  background: rgb(12 74 110 / 0.25);
+  color: rgb(186 230 253);
+  border-color: rgb(14 116 144 / 0.45);
+}
+
+.employee-card-context--issued {
+  background: rgb(236 253 245);
+  color: rgb(6 78 59);
+  border: 1px solid rgb(167 243 208);
+}
+
+.dark .employee-card-context--issued {
+  background: rgb(6 78 59 / 0.25);
+  color: rgb(167 243 208);
+  border-color: rgb(16 185 129 / 0.35);
+}
+
+.employee-card-output-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.employee-card-output-btn {
+  width: 100%;
+  justify-content: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+}
+
+.employee-card-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin: 0;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgb(241 245 249);
+}
+
+.dark .employee-card-meta {
+  border-top-color: rgb(51 65 85 / 0.6);
+}
+
+.employee-card-meta div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.employee-card-meta dt {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgb(100 116 139);
+}
+
+.employee-card-meta dd {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: rgb(15 23 42);
+}
+
+.dark .employee-card-meta dd {
+  color: rgb(248 250 252);
+}
+
+.employee-card-stage {
+  display: flex;
+  flex-direction: column;
+  min-height: min(72vh, 680px);
+  border-radius: 1rem;
+  border: 1px solid rgb(186 220 235 / 0.9);
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgb(200 230 248 / 0.55), transparent),
+    linear-gradient(180deg, #e8f4f8 0%, #dceef6 45%, #d4e8f2 100%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.8);
+  overflow: hidden;
+}
+
+.dark .employee-card-stage {
+  border-color: rgb(51 65 85);
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgb(30 58 95 / 0.4), transparent),
+    linear-gradient(180deg, rgb(15 23 42) 0%, rgb(17 33 53) 100%);
+}
+
+.employee-card-stage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 1.1rem;
+  border-bottom: 1px solid rgb(255 255 255 / 0.5);
+  background: rgb(255 255 255 / 0.35);
+}
+
+.employee-card-stage-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.employee-card-stage-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgb(51 65 85);
+}
+
+.dark .employee-card-stage-label {
+  color: rgb(226 232 240);
+}
+
+.employee-card-stage-hint {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: rgb(100 116 139);
+}
+
+.dark .employee-card-stage-hint {
+  color: rgb(148 163 184);
+}
+
+.dark .employee-card-stage-header {
+  border-bottom-color: rgb(51 65 85 / 0.5);
+  background: rgb(0 0 0 / 0.15);
+}
+
+.employee-card-flip-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid rgb(186 220 235);
+  background: #fff;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #1a3a4a;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.employee-card-flip-chip:hover {
+  background: #f0f9ff;
+  color: #0fa8c8;
+}
+
+.employee-card-flip-chip:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.employee-card-flip-chip:disabled:hover {
+  background: #fff;
+  color: #1a3a4a;
+}
+
+.dark .employee-card-flip-chip {
+  border-color: rgb(71 85 105);
+  background: rgb(30 41 59);
+  color: rgb(226 232 240);
+}
+
+.employee-card-modal-dialog {
+  max-height: min(92vh, 880px);
+  height: min(92vh, 880px);
+}
+
+.employee-card-modal-body {
+  min-height: 0;
+  flex: 1;
+  overflow: auto;
+  padding: 0.85rem 1rem 1rem;
+}
+
+.employee-card-modal-grid {
+  min-height: 0;
+}
+
+.employee-card-stage--modal {
+  min-height: min(52vh, 480px);
+}
+
+@media (max-width: 1023px) {
+  .employee-card-modal-dialog {
+    height: min(94vh, 900px);
+  }
+
+  .employee-card-stage--modal {
+    min-height: 420px;
+  }
+}
+
+.employee-card-root {
+  --blue-light: #D1E9F9;
+  --blue-deep: #0078C1;
+  --teal: #0078C1;
+  --navy: #1a3a4a;
+  --card-w: 320px;
+  --card-h: 520px;
+}
+
+.employee-card-root,
+.employee-card-root *,
+.employee-card-root *::before,
+.employee-card-root *::after {
+  box-sizing: border-box;
+}
+
+.employee-card-modal-dialog {
+  max-height: min(92vh, 880px);
+  height: min(92vh, 880px);
+}
+
+.employee-card-modal-body {
+  min-height: 0;
+  flex: 1;
+  overflow: auto;
+  padding: 0.85rem 1rem 1rem;
+}
+
+.employee-card-modal-grid {
+  min-height: 0;
+}
+
+.employee-card-stage--modal {
+  min-height: min(52vh, 480px);
+}
+
+@media (max-width: 1023px) {
+  .employee-card-modal-dialog {
+    height: min(94vh, 900px);
+  }
+
+  .employee-card-stage--modal {
+    min-height: 420px;
+  }
+}
+
+.employee-card-root {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: transparent;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1.25rem 2rem;
+  width: 100%;
+  min-height: 0;
+}
+
+.employee-card-root .scene {
+  perspective: 1000px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.employee-card-root .card-wrap {
+  width: var(--card-w);
+  height: var(--card-h);
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.employee-card-root .card-wrap.flipped {
+  transform: rotateY(180deg);
+}
+
+.employee-card-root .card-wrap.export-flipping {
+  transition: none;
+  animation: employee-card-export-flip 1.15s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+@keyframes employee-card-export-flip {
+  0%,
+  100% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(180deg);
+  }
+}
+
+.employee-card-root .card-wrap.export-flipping.flipped {
+  animation: employee-card-export-flip 1.15s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .employee-card-root .card-wrap.export-flipping {
+    animation: none;
+    transform: rotateY(0deg);
+  }
+}
+
+.employee-card-root .card-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(10, 60, 90, 0.22);
+}
+
+.employee-card-root .card-front {
+  background: #ddedf7;
+  /* Absolute children — html2canvas mishandles flex-grow centering on export */
+  display: block;
+}
+
+.employee-card-root .wave-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 160px;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+.employee-card-root .wave-top svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.employee-card-root .wave-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 110px;
+  z-index: 0;
+  pointer-events: none;
+}
+.employee-card-root .wave-bottom svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.employee-card-root .logo-area {
+  position: absolute;
+  z-index: 2;
+  top: 18px;
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  width: 100%;
+}
+.employee-card-root .logo-text {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: 0;
+  line-height: 1.15;
+}
+.employee-card-root .logo-text span {
+  color: var(--teal);
+}
+.employee-card-root .logo-sub {
+  font-size: 7.5px;
+  font-weight: 600;
+  color: #5a7a8a;
+  letter-spacing: 1.2px;
+  margin-top: 2px;
+  line-height: 1.3;
+}
+
+/* Fixed band between logo and bottom wave */
+.employee-card-root .front-body {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  top: 72px;
+  height: 338px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0 20px;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.employee-card-root .front-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.employee-card-root .avatar-ring {
+  position: relative;
+  z-index: 2;
+  margin: 0 auto;
+  width: 152px;
+  height: 152px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f5d76e, #f0a500);
+  padding: 4px;
+  box-shadow: 0 8px 24px rgba(240, 165, 0, 0.35);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+.employee-card-root .avatar-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--blue-light);
+  overflow: hidden;
+}
+.employee-card-root .avatar-inner img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.employee-card-root .avatar-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+.employee-card-root .avatar-placeholder svg {
+  width: 58%;
+  height: 58%;
+  display: block;
+}
+.employee-card-root .avatar-placeholder[hidden] {
+  display: none !important;
+}
+
+.employee-card-root .emp-id-pill {
+  position: relative;
+  z-index: 2;
+  margin-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50px;
+  padding: 4px 14px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+.employee-card-root .emp-id-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  flex-shrink: 0;
+}
+.employee-card-root .emp-id-text {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: 1.5px;
+  line-height: 1.35;
+}
+
+.employee-card-root .name-kh {
+  position: relative;
+  z-index: 2;
+  margin-top: 14px;
+  font-family: 'Kantumruy Pro', 'Noto Sans Khmer', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+  min-height: 0;
+  text-align: center;
+}
+.employee-card-root .name-kh:empty {
+  display: none;
+}
+
+.employee-card-root .name-en {
+  position: relative;
+  z-index: 2;
+  margin-top: 4px;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: 1.5px;
+  line-height: 1.35;
+  text-align: center;
+}
+.employee-card-root .name-kh:empty + .name-en {
+  margin-top: 14px;
+}
+
+.employee-card-root .title-badge {
+  position: relative;
+  z-index: 2;
+  margin-top: 12px;
+  display: inline-block;
+  background: linear-gradient(90deg, #7ec8e3, #0fa8c8);
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  line-height: 1.35;
+  padding: 6px 22px;
+  border-radius: 50px;
+  box-shadow: 0 4px 14px rgba(15, 168, 200, 0.35);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.employee-card-root .card-back {
+  transform: rotateY(180deg);
+  background: #c8dff0;
+  display: block;
+  padding: 0;
+  overflow: hidden;
+}
+
+.employee-card-root .back-header {
+  position: absolute;
+  z-index: 2;
+  top: 18px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  width: 100%;
+}
+
+.employee-card-root .back-logo {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.15;
+}
+.employee-card-root .back-logo span {
+  color: var(--teal);
+}
+.employee-card-root .back-sub {
+  font-size: 7.5px;
+  font-weight: 600;
+  color: #5a7a8a;
+  letter-spacing: 1.2px;
+  text-align: center;
+  margin-top: 2px;
+  line-height: 1.3;
+}
+
+.employee-card-root .back-main {
+  position: absolute;
+  z-index: 2;
+  left: 20px;
+  right: 20px;
+  top: 70px;
+  height: 362px;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.employee-card-root .back-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 14px;
+}
+
+.employee-card-root .back-qr-block {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.employee-card-root .back-qr-frame {
+  width: 156px;
+  height: 156px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 10px;
+  box-shadow:
+    0 1px 2px rgba(15, 42, 56, 0.04),
+    0 8px 24px rgba(15, 42, 56, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.employee-card-root .back-qr-frame svg {
+  width: 136px;
+  height: 136px;
+  display: block;
+  border-radius: 4px;
+}
+
+.employee-card-root .back-qr-placeholder {
+  font-size: 11px;
+  font-weight: 700;
+  color: #8aa0ad;
+  letter-spacing: 0.5px;
+}
+
+.employee-card-root .back-qr-empid {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  color: var(--navy);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.employee-card-root .back-contacts {
+  position: relative;
+  z-index: 2;
+  width: auto;
+  max-width: 100%;
+  min-width: 200px;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  margin: 0 auto;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.employee-card-root .contact-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.employee-card-root .contact-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.employee-card-root .contact-icon.phone {
+  background: #0fa8c8;
+}
+.employee-card-root .contact-icon.tele {
+  background: #229ed9;
+}
+.employee-card-root .contact-icon svg {
+  width: 13px;
+  height: 13px;
+  fill: #fff;
+  display: block;
+}
+.employee-card-root .contact-icon.tele svg {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.employee-card-root .contact-text {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.employee-card-root .contact-label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #6a8494;
+  line-height: 1.3;
+}
+
+.employee-card-root .contact-val {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 0.2px;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.employee-card-root .back-footer {
+  position: absolute;
+  z-index: 3;
+  right: 16px;
+  bottom: 36px;
+  width: auto;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
+.employee-card-root .expire-badge {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  text-align: right;
+}
+.employee-card-root .expire-label {
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(26, 58, 74, 0.75);
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+.employee-card-root .expire-val {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: 1px;
+  line-height: 1.35;
+}
+
+.employee-card-root .back-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 88px;
+  z-index: 1;
+  pointer-events: none;
+}
+.employee-card-root .back-wave svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Flatten transforms / glass effects while html2canvas runs */
+.employee-card-root.is-capturing .card-wrap,
+.employee-card-root.is-capturing .card-wrap.flipped,
+.employee-card-root.is-capturing .card-wrap.export-flipping {
+  transform: none !important;
+  animation: none !important;
+  transition: none !important;
+}
+.employee-card-root.is-capturing .card-face {
+  backface-visibility: visible !important;
+  -webkit-backface-visibility: visible !important;
+  box-shadow: none !important;
+}
+.employee-card-root.is-capturing .card-back {
+  transform: none !important;
+}
+.employee-card-root.is-capturing .back-contacts,
+.employee-card-root.is-capturing .emp-id-pill {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: #ffffff !important;
+}
+
+.employee-card-preview-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 30, 50, 0.65);
+  backdrop-filter: blur(6px);
+  /* Above Modal (z-210) / ConfirmDialog (z-220); portaled to document.body */
+  z-index: 230;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+.employee-card-preview-overlay.active {
+  display: flex;
+}
+
+.employee-card-preview-box {
+  background: #fff;
+  border-radius: 20px;
+  padding: 36px 40px;
+  max-width: min(94vw, 900px);
+  width: 92%;
+  text-align: center;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+  animation: iroc-ec-popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes iroc-ec-popIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.employee-card-preview-box h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 24px;
+  letter-spacing: 0.5px;
+}
+.employee-card-preview-box .preview-canvases {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.employee-card-preview-box .preview-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #5a7a8a;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.employee-card-preview-box .preview-canvases canvas {
+  border-radius: 14px;
+  max-width: min(44vw, 280px);
+  width: 100%;
+  height: auto;
+  display: block;
+  box-shadow: 0 12px 32px rgb(15 23 42 / 0.15);
+}
+
+.employee-card-preview-close {
+  padding: 10px 28px;
+  background: #eee;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #555;
+}
+
+/* Print host is mounted on document.body only while printing */
+.employee-card-print-host {
+  display: none;
+}
+
+/* Print only while the dedicated card page is mounted */
+@media (min-width: 1280px) {
+  .employee-card-root .card-wrap {
+    transform: scale(1.05);
+    transform-origin: center center;
+  }
+  .employee-card-root .card-wrap.flipped {
+    transform: rotateY(180deg) scale(1.05);
+  }
+  .employee-card-root .card-wrap.export-flipping {
+    animation: employee-card-export-flip-lg 1.15s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  }
+  .employee-card-root .card-wrap.export-flipping.flipped {
+    animation: employee-card-export-flip-lg 1.15s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  }
+  .employee-card-root.is-capturing .card-wrap,
+  .employee-card-root.is-capturing .card-wrap.flipped,
+  .employee-card-root.is-capturing .card-wrap.export-flipping,
+  .employee-card-root.is-capturing .card-wrap.export-flipping.flipped {
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+@keyframes employee-card-export-flip-lg {
+  0%,
+  100% {
+    transform: scale(1.05) rotateY(0deg);
+  }
+  50% {
+    transform: scale(1.05) rotateY(180deg);
+  }
+}
+
+@media print {
+  /* Hide entire app UI; only the body-mounted print host stays visible */
+  body.employee-card-printing * {
+    visibility: hidden;
+  }
+
+  body.employee-card-printing .employee-card-print-host,
+  body.employee-card-printing .employee-card-print-host * {
+    visibility: visible;
+  }
+
+  body.employee-card-printing .employee-card-print-host {
+    display: flex !important;
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    margin: 0;
+    background: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body.employee-card-printing .employee-card-print-host img {
+    width: 320px;
+    height: 520px;
+    border-radius: 22px;
+    box-shadow: none;
+    display: block;
+    object-fit: contain;
+    page-break-inside: avoid;
+  }
+}
+
+@page {
+  margin: 12mm;
+}

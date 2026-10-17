@@ -1,0 +1,1 @@
+import{j as o}from"./ui-BPliW9hn.js";import{o as a,g as s}from"./formInputFilters-jHP_RY3T.js";const e=({kind:e="decimal",value:i,onValueChange:n,filterOptions:t,...r})=>o.jsx("input",{...s(e),value:i,onChange:a(e,n,t),...r});export{e as N};

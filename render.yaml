@@ -1,0 +1,76 @@
+# redeploy-marker: 2026-08-10 10:32:00
+services:
+  - type: web
+    name: hcms-backend
+    env: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm run start:prod
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGIN
+        value: https://iroc-hcms-frontend1.onrender.com
+      - key: FRONTEND_URL
+        value: https://iroc-hcms-frontend1.onrender.com
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: 3306
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_NAME
+        value: hcms_db
+      - key: MYSQL_URL
+        sync: false
+      - key: DB_SSL
+        value: "true"
+      - key: OTP_DELIVERY
+        value: email
+      - key: OTP_PROVIDER
+        value: gmail
+      - key: OTP_SENDER_NAME
+        value: HRMS_ROC_SERVICE
+      - key: GMAIL_USER
+        value: iroc.hcms@gmail.com
+      - key: GMAIL_FROM
+        value: iroc.hcms@gmail.com
+      - key: GMAIL_APP_PASSWORD
+        sync: false
+      - key: GMAIL_APPS_SCRIPT_URL
+        sync: false
+      - key: GMAIL_APPS_SCRIPT_SECRET
+        sync: false
+      - key: SETUP_ADMIN_TOKEN
+        sync: false
+
+  - type: static
+    name: hcms-frontend
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    autoDeploy: true
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://iroc-service-hcms.onrender.com
+      - key: VITE_USE_MOCK_ADAPTER
+        value: false
+    routes:
+      # Serve built assets / fonts before SPA fallback (PDF export font lives here).
+      - type: rewrite
+        source: /assets/*
+        destination: /assets/*
+      - type: rewrite
+        source: /fonts/*
+        destination: /fonts/*
+      # Prefer exact static file; keep SPA fallback for client routes.
+      - type: rewrite
+        source: /*
+        destination: /index.html

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="color-scheme" content="light dark" />
+    <title>HCMS | Human Capital Management System</title>
+    <meta name="description" content="Professional HR platform for attendance, payroll, recruitment, and workforce management." />
+    <meta name="theme-color" content="#0f766e" />
+    <meta name="apple-mobile-web-app-title" content="HCMS" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="/images/iroc-logo.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Fonts: Inter (English) and Kantumruy Pro (Khmer) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+    <script>
+      (function() {
+        try {
+          const saved = localStorage.getItem('hcms_theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (saved === 'dark' || (!saved && prefersDark)) {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+          } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <style>
+      #hcms-boot {
+        min-height: 100dvh;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #f8fafc;
+        overflow: hidden;
+        position: relative;
+      }
+      html.dark #hcms-boot { background: #020617; }
+      #hcms-boot .orb {
+        position: absolute; border-radius: 9999px; filter: blur(48px); opacity: 0.5; pointer-events: none;
+        animation: boot-orb 7s ease-in-out infinite alternate;
+      }
+      #hcms-boot .orb-a { width: 14rem; height: 14rem; top: 18%; left: 10%; background: rgba(13,148,136,.28); }
+      #hcms-boot .orb-b { width: 12rem; height: 12rem; bottom: 18%; right: 8%; background: rgba(37,99,235,.16); animation-delay: -2s; }
+      @keyframes boot-orb {
+        from { transform: translate(0,0) scale(1); }
+        to { transform: translate(10px,-14px) scale(1.06); }
+      }
+      #hcms-boot-lottie {
+        position: relative;
+        z-index: 1;
+        width: min(13rem, 56vw);
+        height: min(13rem, 56vw);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #hcms-boot .orb { animation: none !important; }
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 antialiased font-sans transition-colors duration-200">
+    <div id="root">
+      <div id="hcms-boot" aria-busy="true" aria-live="polite" aria-label="Loading">
+        <div class="orb orb-a" aria-hidden="true"></div>
+        <div class="orb orb-b" aria-hidden="true"></div>
+        <div id="hcms-boot-lottie" aria-hidden="true"></div>
+      </div>
+    </div>
+    <script src="/vendor/lottie_light.min.js"></script>
+    <script>
+      (function () {
+        try {
+          var el = document.getElementById('hcms-boot-lottie');
+          if (!el || typeof lottie === 'undefined') return;
+          window.__hcmsBootAnim = lottie.loadAnimation({
+            container: el,
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: '/lottie/loading.json'
+          });
+        } catch (e) {}
+      })();
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
